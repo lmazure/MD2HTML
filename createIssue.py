@@ -10,8 +10,8 @@ def run_graphql_query(token, query):
     else:
         raise Exception(f"Query failed to run by returning code of {request.status_code}. {query}")
     
-def create_issue(token, project, title, description):
-    request = """
+def create_issue(token, project_path, issue_title, issue_description):
+    query = """
     mutation {
         createIssue(input: {
             projectPath: "%s",
@@ -27,9 +27,9 @@ def create_issue(token, project, title, description):
             errors
         }
     }
-    """ % (project, title, description)
+    """ % (project_path, issue_title, issue_description)
 
-    payload = run_graphql_query(token, request)
+    payload = run_graphql_query(token, query)
     return payload["data"]["createIssue"]["issue"]["webUrl"]
 
 # Parse arguments
@@ -40,10 +40,10 @@ parser.add_argument('markdown_file', type=str, help=' Markdown file containing t
 parser.add_argument('project_path', type=str, help='project path')
 args = parser.parse_args()
 
-# Read Markfown file
+# Read Markdown file
 with open(args.markdown_file, 'r') as file:
     description = file.read()
 
-# Use the function with the arguments
+# Create the issue
 isssue_url = create_issue(args.token, args.project_path, args.title, description)
 print(isssue_url)
