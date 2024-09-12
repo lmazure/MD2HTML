@@ -17,7 +17,9 @@ $ cat desc.html
 ```
 
 ## markdown-to-html-converter-1.0-SNAPSHOT-jar-with-dependencies.jar
-Convert a Markdown file into a HTML file using Java.[INFO] Scanning for projects...
+Convert a Markdown file into a HTML file using Java.
+```sh
+[INFO] Scanning for projects...
 [INFO] 
 [INFO] ---------------< com.example:markdown-to-html-converter >---------------
 [INFO] Building markdown-to-html-converter 1.0-SNAPSHOT
