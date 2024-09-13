@@ -3,9 +3,10 @@
 ## createIssue.py
 Create an issue whose description is defined by a Markdown file
 ```sh
-$ python createIssue.py $GITLAB_TOKEN "blabla" testfile.md lmazure_TestGroup/20240911
+$ python createIssue.py $GITLAB_TOKEN "my title" desc.md lmazure_TestGroup/20240911
 https://gitlab.com/lmazure_TestGroup/20240911/-/issues/10
 ```
+
 ## getIssueDescription.py
 Retrieve the Markdown and HTML description of an issue (given its URL) and write them in two files
 ```sh
@@ -14,6 +15,13 @@ $ cat desc.md
 My test.
 $ cat desc.html
 <p data-sourcepos="1:1-1:8" dir="auto">My test.</p>
+```
+
+## deleteIssue.py
+Delete an issue (given its URL)
+```sh
+$ python deleteIssue.py $GITLAB_TOKEN https://gitlab.com/lmazure_TestGroup/20240911/-/issues/3
+
 ```
 
 ## markdown-to-html-converter-1.0-SNAPSHOT-jar-with-dependencies.jar
