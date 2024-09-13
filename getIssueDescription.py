@@ -1,6 +1,6 @@
 import requests
 import argparse
-from urllib.parse import urlparse, parse_qs
+from urllib.parse import urlparse
 
 def run_graphql_query(token, query):
     headers = {"Authorization": "Bearer " + token}
