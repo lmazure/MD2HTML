@@ -74,3 +74,13 @@ $ java -jar target/markdown-to-html-converter-1.0-SNAPSHOT-jar-with-dependencies
 Conversion completed successfully.
 ```
 
+## markdown-to-html-converter-1.0-SNAPSHOT-jar-with-dependencies.jar
+Loop on all Markdown samples and get HTML from GitLab and from Java transformation.
+```sh
+$ python loop.py $GITLAB_TOKEN markdown-samples/list.csv lmazure_TestGroup/20240911
+Done with 001.
+Done with 002.
+Done with 003.
+Done with 004.
+Done with 005.
+```
