@@ -28,9 +28,11 @@ def create_issue(token, project_path, issue_title, issue_description):
             errors
         }
     }
-    """ % (project_path, json.dumps(issue_title), json.dumps(issue_description))
+    """ % (project_path, json.dumps(issue_title, ensure_ascii=False), json.dumps(issue_description, ensure_ascii=False))
 
     payload = run_graphql_query(token, query)
+    if "data" not in payload:
+        raise Exception(f"Invalid payload answer: {payload}")
     return payload["data"]["createIssue"]["issue"]["webUrl"]
 
 # Parse arguments
@@ -42,7 +44,7 @@ parser.add_argument('project_path', type=str, help='GitLab project path')
 args = parser.parse_args()
 
 # Read Markdown file
-with open(args.markdown_file, 'r') as file:
+with open(args.markdown_file, 'r', encoding="utf8") as file:
     description = file.read()
 
 # Create the issue
