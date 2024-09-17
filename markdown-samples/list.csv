@@ -1,6 +1,16 @@
 index,description
-001,empty
-002,foobar
-003,double quote
-004,basic
+001,Empty
+002,Foobar
+003,Double quote
+004,Basic
 005,JSON table
+901,Incomplete task
+902,Completed task
+903,Inapplicable task
+904.Inapplicable task in a "loose" list
+905,YAML front matter
+906,TOML front matter
+907,JSON front matter
+908,Front matter blocks should be inserted at the top of the document
+909,Front matter block delimiters shouldn’t be preceded by space characters
+910,Table of contents

@@ -1,6 +1,24 @@
 import argparse
 import csv
 import subprocess
+import sys
+
+def get_python_executable():
+    # If running in a virtual environment, use its Python
+    if (sys.prefix != sys.base_prefix):
+        return sys.executable
+    # Otherwise, use the system Python
+    return 'python'
+
+def run_subprocess(command, error_message):
+    if command[0] == 'python':
+        command[0] = get_python_executable()
+    
+    result = subprocess.run(command, capture_output=True, text=True)
+    if result.stderr:
+        print(f"Error in {error_message}:", result.stderr)
+        sys.exit(1)
+    return result.stdout.strip()
 
 def process_csv(token, project_path, csv_filename):
     with open(csv_filename, 'r') as csvfile:
@@ -9,23 +27,38 @@ def process_csv(token, project_path, csv_filename):
             index = row['index']
             description = row['description']
             markdown_file = f"markdown-samples/{index}.md"
-            result = subprocess.run(['python', 'createIssue.py', token, description, markdown_file, project_path], capture_output=True, text=True)
-            if result.stderr:
-                print("Error in createIssue.py:", result.stderr)
-                exit(1)
-            issue_url = result.stdout
-            result = subprocess.run(['python', 'getIssueDescription.py', token, issue_url, f"output/gitlab_{index}.html", f"output/gitlab_{index}.md"], capture_output=True, text=True)
-            if result.stderr:
-                print("Error in getIssueDescription.py:", result.stderr)
-                exit(1)
-            result = subprocess.run(['python', 'deleteIssue.py', token, issue_url], capture_output=True, text=True)
-            if result.stderr:
-                print("Error in deleteIssue.py:", result.stderr)
-                exit(1)
-            result = subprocess.run(['java', '-jar', 'java/target/markdown-to-html-converter-1.0-SNAPSHOT-jar-with-dependencies.jar', markdown_file, f"output/java_{index}.html"], capture_output=True, text=True)
-            if result.stderr:
-                print("Error in java -jar java/target/markdown-to-html-converter-1.0-SNAPSHOT-jar-with-dependencies.jar:", result.stderr)
-                exit(1)
+
+            # Create issue
+            issue_url = run_subprocess(
+                ['python', 'createIssue.py', token, description, markdown_file, project_path],
+                'createIssue.py'
+            )
+
+            # Create issue
+            run_subprocess(
+                ['python', 'generateScreenshot.py', issue_url, f"output/gitlab_{index}.png"],
+                'generateScreenshot.py'
+            )
+
+            # Get issue description
+            run_subprocess(
+                ['python', 'getIssueDescription.py', token, issue_url, f"output/gitlab_{index}.html", f"output/gitlab_{index}.md"],
+                'getIssueDescription.py'
+            )
+
+            # Delete issue
+            run_subprocess(
+                ['python', 'deleteIssue.py', token, issue_url],
+                'deleteIssue.py'
+            )
+
+            ### Curently broken because of the f*cking python virtual environment
+            ### # Convert markdown to HTML
+            ### run_subprocess(
+            ###     ['java', '-jar', 'java/target/markdown-to-html-converter-1.0-SNAPSHOT-jar-with-dependencies.jar', markdown_file, f"output/java_{index}.html"],
+            ###     'java -jar markdown-to-html-converter'
+            ### )
+
             print(f"Done with {index}.")
 
 # Parse arguments
