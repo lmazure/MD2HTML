@@ -4,6 +4,7 @@ index,description
 003,Double quote
 004,Basic
 005,JSON table
+006,Unicode
 801,Line breaks
 802,Emphasis
 803,Multiple underscores in words and mid-word emphasis
@@ -60,7 +61,7 @@ index,description
 901,Incomplete task
 902,Completed task
 903,Inapplicable task
-904.Inapplicable task in a "loose" list
+904."Inapplicable task in a ""loose"" list"
 905,YAML front matter
 906,TOML front matter
 907,JSON front matter
