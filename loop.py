@@ -25,7 +25,7 @@ def process_csv(token, project_path, csv_filename, title_prefix):
         csv_reader = csv.DictReader(csvfile)
         for row in csv_reader:
             index = row['index']
-            description = title_prefix + " - " + index + " -" + row['description']
+            description = title_prefix + " - " + index + " - " + row['description']
             markdown_file = f"markdown-samples/{index}.md"
 
             # Create issue
@@ -34,15 +34,16 @@ def process_csv(token, project_path, csv_filename, title_prefix):
                 'createIssue.py'
             )
 
-            # Create issue
-            run_subprocess(
-                ['python', 'generateScreenshot.py', issue_url, f"output/gitlab_{index}.png"],
-                'generateScreenshot.py'
-            )
+            ### this does not work because of GitLab anti-bot captcha
+            ### # Generate screenshot of GitLab page of the issue
+            ### run_subprocess(
+            ###     ['python', 'generateScreenshot.py', issue_url, f"output/{index}_gitlab.png"],
+            ###     'generateScreenshot.py'
+            ### )
 
             # Get issue description
             run_subprocess(
-                ['python', 'getIssueDescription.py', token, issue_url, f"output/gitlab_{index}.html", f"output/gitlab_{index}.md"],
+                ['python', 'getIssueDescription.py', token, issue_url, f"output/{index}_gitlab.html", f"output/{index}_gitlab.md"],
                 'getIssueDescription.py'
             )
 
@@ -52,12 +53,11 @@ def process_csv(token, project_path, csv_filename, title_prefix):
             ###     'deleteIssue.py'
             ### )
 
-            ### Curently broken because of the f*cking python virtual environment
-            ### # Convert markdown to HTML
-            ### run_subprocess(
-            ###     ['java', '-jar', 'java/target/markdown-to-html-converter-1.0-SNAPSHOT-jar-with-dependencies.jar', markdown_file, f"output/java_{index}.html"],
-            ###     'java -jar markdown-to-html-converter'
-            ### )
+            # Convert markdown to HTML using our Java program
+            run_subprocess(
+                ['java', '-jar', 'java/target/markdown-to-html-converter-1.0-SNAPSHOT-jar-with-dependencies.jar', markdown_file, f"output/{index}_java.html"],
+                'java -jar markdown-to-html-converter'
+            )
 
             print(f"Done with {index}.")
 

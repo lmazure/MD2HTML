@@ -61,7 +61,7 @@ index,description
 901,Incomplete task
 902,Completed task
 903,Inapplicable task
-904."Inapplicable task in a ""loose"" list"
+904,"Inapplicable task in a ""loose"" list"
 905,YAML front matter
 906,TOML front matter
 907,JSON front matter
