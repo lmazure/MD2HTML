@@ -45,14 +45,14 @@ project_path = '/'.join(path_parts[1:-3])
 descriptions = get_issue(args.token, project_path, issue_iid)
 
 try:
-    with open(args.markdown_file, 'x') as file:
+    with open(args.markdown_file, 'x', encoding="utf8") as file:
         file.write(descriptions["description"])
 except FileExistsError:
     print(f"Error: {args.markdown_file} already exists. Refusing to overwrite.")
     exit(1)
 
 try:
-    with open(args.html_file, 'x') as file:
+    with open(args.html_file, 'x', encoding="utf8") as file:
         file.write(descriptions["descriptionHtml"])
 except FileExistsError:
     print(f"Error: {args.html_file} already exists. Refusing to overwrite.")

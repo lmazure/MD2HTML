@@ -20,12 +20,12 @@ def run_subprocess(command, error_message):
         sys.exit(1)
     return result.stdout.strip()
 
-def process_csv(token, project_path, csv_filename):
-    with open(csv_filename, 'r') as csvfile:
+def process_csv(token, project_path, csv_filename, title_prefix):
+    with open(csv_filename, 'r', encoding="utf8") as csvfile:
         csv_reader = csv.DictReader(csvfile)
         for row in csv_reader:
             index = row['index']
-            description = row['description']
+            description = title_prefix + " - " + index + " -" + row['description']
             markdown_file = f"markdown-samples/{index}.md"
 
             # Create issue
@@ -46,11 +46,11 @@ def process_csv(token, project_path, csv_filename):
                 'getIssueDescription.py'
             )
 
-            # Delete issue
-            run_subprocess(
-                ['python', 'deleteIssue.py', token, issue_url],
-                'deleteIssue.py'
-            )
+            ### # Delete issue
+            ### run_subprocess(
+            ###     ['python', 'deleteIssue.py', token, issue_url],
+            ###     'deleteIssue.py'
+            ### )
 
             ### Curently broken because of the f*cking python virtual environment
             ### # Convert markdown to HTML
@@ -66,6 +66,7 @@ parser = argparse.ArgumentParser(description='Delete a GitLab issue.')
 parser.add_argument('token', type=str, help='GitLab token')
 parser.add_argument('csv_index', type=str, help='CSV file containing the index')
 parser.add_argument('project_path', type=str, help='GitLab project path')
+parser.add_argument('title_prefix', type=str, help='prefix of issue titles')
 args = parser.parse_args()
 
-process_csv(args.token, args.project_path, args.csv_index)
+process_csv(args.token, args.project_path, args.csv_index, args.title_prefix)
