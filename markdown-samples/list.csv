@@ -4,6 +4,59 @@ index,description
 003,Double quote
 004,Basic
 005,JSON table
+801,Line breaks
+802,Emphasis
+803,Multiple underscores in words and mid-word emphasis
+804,inline diff
+805,inline diff with backticks
+806,Headings
+807,Headings using an underline style
+808,Heading IDs and links
+809,Links
+810,URL auto-linking
+811,Image
+812,Vidéo
+813,Audio
+814,List
+815,Unordered list 1
+816,List 2
+817,List 3
+818,Task list
+819,Blockquotes
+820,Multiline blockquote
+821,Code spans and blocks 1
+822,Code spans and blocks 2
+823,Code spans and blocks 3
+824,Syntax highlighting
+825,Mermaid 1
+826,Mermaid 2
+827,PlantUML
+828,LaTeX
+829,Table 1
+830,"Table, Alignment"
+831,"Table, Cells with multiple lines"
+832,"Table, Task lists in tables"
+833,"JSON table, empty"
+834,"JSON table, full"
+835,"JSON table, custom labels + sorting"
+836,"JSON table, custom labels + filter"
+837,"JSON table, caption"
+838,Table of contents
+839,Colors
+840,Emoji
+841,"Front matter, YAML"
+842,"Front matter, TOML"
+843,"Front matter, JSON"
+844,Escape characters
+845,Footnotes
+846,Horizontal rule
+847,Inline HTML
+848,Markdown in HTML
+849,Collapsible section
+850,"Collapsible section, Markodown inside"
+851,Keyboard HTML tag
+852,Superscripts / Subscripts
+853,References
 901,Incomplete task
 902,Completed task
 903,Inapplicable task
