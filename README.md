@@ -161,5 +161,6 @@ Done with 005.
 
 ## Test cases
 - 000→005 are basic smoke tests
+- 101→1XX are URL test samples generated with `generate_url_samples.py`
 - 801→853 are (a quick 'n dirty extract) from https://docs.gitlab.com/ee/user/markdown.html
 - 901→910 are from https://gitlab.com/gitlab-org/gitlab/-/blob/master/glfm_specification/input/gitlab_flavored_markdown/glfm_official_specification.md
