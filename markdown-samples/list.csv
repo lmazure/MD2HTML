@@ -9,6 +9,7 @@ index,description
 008,HTML table (with merged cells)
 009,HTML mess (includes a form and a script)
 010,SVG
+011,Garbage HTML tags
 100,"URL = 'logo.png'"
 101,"URL = 'logo.jpg'"
 102,"URL = 'video.mp4'"
