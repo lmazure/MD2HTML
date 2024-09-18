@@ -5,6 +5,7 @@ index,description
 004,Basic
 005,JSON table
 006,Unicode
+007,Inlined JavaScript
 801,Line breaks
 802,Emphasis
 803,Multiple underscores in words and mid-word emphasis
