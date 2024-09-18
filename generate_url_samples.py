@@ -71,7 +71,9 @@ files = [
     "%"
 ]
 
-markdown_template = """# Links
+markdown_template = """# Markdown
+
+## Links
 - {url}
 - [link]({url})
 - [link that also has title text]({url} "This link takes you to somewhere!")
@@ -82,7 +84,7 @@ markdown_template = """# Links
 [1]: {url}
 [link text itself]: {url}
 
-# Image
+## Image
 
 ![image]({url})  
 ![image with title text]({url} "Title Text")  
@@ -90,13 +92,110 @@ markdown_template = """# Links
 ![image reference style][logo]  
 [logo]: {url} "Title Text"
 
-# Video/audio
+## Video/audio
 
 ![Video]({url})  
 ![Video with title text]({url})  
 ![Video with title text with absolute size]({url} "Title Text"){{width=100 height=100px}}  
 ![Video with title text with relative size]({url} "Title Text"){{width=75%}}
 
+# raw HTML
+
+## Image
+
+<img src="{url}" alt="Description of image">
+
+<img src="{url}" alt="Description" width="300" height="200">
+
+<picture>
+  <source srcset="{url}" media="(min-width: 800px)">
+  <source srcset="{url}" media="(min-width: 400px)">
+  <img src="{url}" alt="Description">
+</picture>
+
+<div style="background-image: url('{url}');"></div>
+
+<figure>
+  <img src="{url}" alt="Description">
+  <figcaption>Caption for the image</figcaption>
+</figure>
+
+<iframe src="{url}" width="500" height="400" frameborder="0" scrolling="no"></iframe>
+
+## Audio
+
+<audio src="a{url}" controls>
+  Your browser does not support the audio element.
+</audio>
+
+<audio controls>
+  <source src="{url}" type="audio/mpeg">
+  <source src="{url}" type="audio/ogg">
+  Your browser does not support the audio element.
+</audio>
+
+<embed src="{url}" width="300" height="50" type="audio/mpeg">
+
+<object data="{url}" type="audio/mpeg" width="300" height="50">
+  <param name="src" value="{url}">
+  <param name="autoplay" value="false">
+  <param name="autostart" value="false">
+</object>
+
+<button onclick="playAudio()">Play Audio</button>
+<script>
+function playAudio() {{
+  var audio = new Audio('{url}');
+  audio.play();
+}}
+</script>
+
+<iframe src="{url}" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+
+## Video
+
+<video src="{url}" controls width="640" height="360">
+  Your browser does not support the video tag.
+</video>
+
+<video controls width="640" height="360">
+  <source src="{url}" type="video/mp4">
+  <source src="{url}" type="video/webm">
+  Your browser does not support the video tag.
+</video>
+
+<iframe width="560" height="315" src="{url}" frameborder="0" allowfullscreen></iframe>
+
+<object data="{url}" width="640" height="360">
+  <param name="src" value="{url}">
+  <param name="autoplay" value="false">
+  <param name="autostart" value="false">
+</object>
+
+<embed src="{url}" width="640" height="360" type="video/mp4">
+
+<video id="myVideo" width="640" height="360">
+  <source src="{url}" type="video/mp4">
+</video>
+<script>
+var video = document.getElementById("myVideo");
+function playPause() {{
+  if (video.paused) {{
+    video.play();
+  }} else {{
+    video.pause();
+  }}
+}}
+</script>
+
+<video controls poster="{url}">
+  <source src="{url}" type="video/mp4">
+  <picture>
+    <source srcset="{url}" media="(min-width: 800px)">
+    <source srcset="{url}" media="(min-width: 400px)">
+    <img src="{url}" alt="Video poster">
+  </picture>
+</video>
 """
 
 for index, u in enumerate(files, start=100):
