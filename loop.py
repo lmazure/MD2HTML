@@ -1,5 +1,6 @@
 import argparse
 import csv
+import os
 import subprocess
 import sys
 
@@ -21,6 +22,7 @@ def run_subprocess(command, error_message):
     return result.stdout.strip()
 
 def process_csv(token, project_path, csv_filename, title_prefix):
+    current_dir = os.getcwd()
     with open(csv_filename, 'r', encoding="utf8") as csvfile:
         csv_reader = csv.DictReader(csvfile)
         for row in csv_reader:
@@ -54,10 +56,21 @@ def process_csv(token, project_path, csv_filename, title_prefix):
 
             # Convert markdown to HTML using our Java program
             run_subprocess(
-                ['java', '-jar', 'java/target/markdown-to-html-converter-1.0-SNAPSHOT-jar-with-dependencies.jar', markdown_file, f"output/{index}_java.html"],
+                ['java', '-jar', 'java/target/markdown-to-html-converter-1.0-SNAPSHOT-jar-with-dependencies.jar', markdown_file, f"output/{index}_our.html"],
                 'java -jar markdown-to-html-converter'
             )
 
+            # Generate screenshot of local page of the issue by using GitLab HTML
+            run_subprocess(
+                ['python', 'generateScreenshot.py', f"file://{current_dir}/output/{index}_gitlab.html", f"output/{index}_local_with_gitlab_html.png"],
+                'generateScreenshot.py'
+            )
+
+            # Generate screenshot of local page of the issue by using out HTML
+            run_subprocess(
+                ['python', 'generateScreenshot.py', f"file://{current_dir}/output/{index}_java.html", f"output/{index}_local_with_our_html.png"],
+                'generateScreenshot.py'
+            )
             print(f"Done with {index}.")
 
 # Parse arguments
