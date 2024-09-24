@@ -34,12 +34,11 @@ def process_csv(token, project_path, csv_filename, title_prefix):
                 'createIssue.py'
             )
 
-            ### this does not work because of GitLab anti-bot captcha
-            ### # Generate screenshot of GitLab page of the issue
-            ### run_subprocess(
-            ###     ['python', 'generateScreenshot.py', issue_url, f"output/{index}_gitlab.png"],
-            ###     'generateScreenshot.py'
-            ### )
+            # Generate screenshot of GitLab page of the issue
+            run_subprocess(
+                ['python', 'generateScreenshot.py', issue_url, f"output/{index}_gitlab.png"],
+                'generateScreenshot.py'
+            )
 
             # Get issue description
             run_subprocess(
